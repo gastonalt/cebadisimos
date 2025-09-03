@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="cbadisimos alpha"
+config/name="Cebadísimos"
 run/main_scene="res://level.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
