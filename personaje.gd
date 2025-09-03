@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D  # o Sprite2D si no usás animaciones
 
 @export var player_id: int = 1  # 1 o 2 según el jugador
-
+var direction: int;
 ## @export var canShoot = false
 
 const SPEED = 300.0
@@ -29,7 +29,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis(prefix + "left", prefix + "right")
+	direction = Input.get_axis(prefix + "left", prefix + "right")
+
 	var arma_holder = get_node("arma_holder")
 	if direction:
 		velocity.x = direction * SPEED

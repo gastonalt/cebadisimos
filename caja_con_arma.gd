@@ -13,7 +13,15 @@ func _process(_delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 ## 	personaje.canShoot = true
-	var arma_scene = load("res://arma.tscn")
+	var armas_agarradas = body.get_node("arma_holder").get_children()
+	for arma in armas_agarradas:
+		arma.free()
+	var arma_scene = load("res://pistola.tscn") ## por defecto
+	match(owner.tipo_arma):
+		1:
+			arma_scene = load("res://pistola.tscn")
+		2:
+			arma_scene = load("res://escopeta.tscn")
 	var arma = arma_scene.instantiate()
 	arma.player_id = body.player_id
 	body.get_node("arma_holder").add_child(arma)

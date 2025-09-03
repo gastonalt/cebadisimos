@@ -19,12 +19,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(prefix + "shoot") and not disparando:
 		disparando = true
 		area.scale = Vector2(max_scale, max_scale)
-		anim.play("shooting")
+		anim.play("shooting_escopeta")
 		
 		for body in area.get_overlapping_bodies():
 			if body.is_in_group("jugadores") and body.player_id != player_id:
 				body.queue_free()
-				print("El jugador %d gana (overlap inicial)" % player_id)
 		
 	if disparando:
 		area.scale += Vector2.ONE * (-velocidad_crecimiento) * delta
@@ -36,8 +35,6 @@ func _process(delta: float) -> void:
 func _on_disparo_animation_animation_finished() -> void:
 	anim.stop()
 
-
 func _on_area_impacto_body_entered(body: Node2D) -> void:
 	if body.player_id != player_id and disparando:
 		body.queue_free()
-		print("El jugador " + String.num(player_id) + " gana.")

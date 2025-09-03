@@ -1,27 +1,27 @@
 [gd_scene load_steps=11 format=3 uid="uid://dn7sg5avpausj"]
 
-[ext_resource type="Script" uid="uid://c7m3knyafvu0q" path="res://arma.gd" id="1_uya3a"]
-[ext_resource type="Texture2D" uid="uid://c2sl3flbcl1lc" path="res://escopeta byCalasonic.png" id="1_vp40w"]
-[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://All_Fire_Bullet_Pixel_16x16.png" id="3_bftl6"]
+[ext_resource type="Script" uid="uid://c7m3knyafvu0q" path="res://escopeta.gd" id="1_2ij0y"]
+[ext_resource type="Texture2D" uid="uid://c2sl3flbcl1lc" path="res://escopeta byCalasonic.png" id="2_kfevs"]
+[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://All_Fire_Bullet_Pixel_16x16.png" id="3_5878n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47or8"]
-atlas = ExtResource("3_bftl6")
+atlas = ExtResource("3_5878n")
 region = Rect2(576, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wlgde"]
-atlas = ExtResource("3_bftl6")
+atlas = ExtResource("3_5878n")
 region = Rect2(544, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bmbf3"]
-atlas = ExtResource("3_bftl6")
+atlas = ExtResource("3_5878n")
 region = Rect2(512, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bulvi"]
-atlas = ExtResource("3_bftl6")
+atlas = ExtResource("3_5878n")
 region = Rect2(480, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pcjl"]
-atlas = ExtResource("3_bftl6")
+atlas = ExtResource("3_5878n")
 region = Rect2(448, 192, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uwfed"]
@@ -49,25 +49,25 @@ animations = [{
 "texture": null
 }],
 "loop": false,
-"name": &"shooting",
+"name": &"shooting_escopeta",
 "speed": 25.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uya3a"]
 
-[node name="arma" type="Node2D"]
-script = ExtResource("1_uya3a")
+[node name="escopeta" type="Node2D"]
+script = ExtResource("1_2ij0y")
 
 [node name="textura" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_vp40w")
+texture = ExtResource("2_kfevs")
 
 [node name="disparo_animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(28, -3)
+position = Vector2(29, -3)
 scale = Vector2(0.59375, 0.59375)
 sprite_frames = SubResource("SpriteFrames_uwfed")
-animation = &"shooting"
+animation = &"shooting_escopeta"
 flip_h = true
 
 [node name="areaImpacto" type="Area2D" parent="."]

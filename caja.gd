@@ -12,6 +12,5 @@ func _process(delta: float) -> void:
 		pass
 
 func _on_area_entered(area: Area2D) -> void:
-	print("entro la balubi")
-	if "disparando" in area.owner and area.owner.disparando == true:
+	if ("disparando" in area.owner and area.owner.disparando == true) or area.name == "bala":
 		self.queue_free()  # eliminamos la caja
