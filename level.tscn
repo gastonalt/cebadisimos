@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://vmkb030d4coo"]
+[gd_scene load_steps=12 format=4 uid="uid://vmkb030d4coo"]
 
 [ext_resource type="Texture2D" uid="uid://bomchkr6yq5rd" path="res://Terrain (16x16).png" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://by48h6oxsecod" path="res://caja_con_arma.gd" id="5_1ainy"]
@@ -31,9 +31,6 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_km5ld")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b4ue"]
-size = Vector2(1280, 320)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
 0:0/0 = 0
@@ -42,8 +39,11 @@ texture = ExtResource("1_u52ul")
 3:0/0 = 0
 4:0/0 = 0
 6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:0/0 = 0
 10:0/0 = 0
 12:0/0 = 0
@@ -182,6 +182,7 @@ texture = ExtResource("1_u52ul")
 20:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_km5ld"]
@@ -196,10 +197,7 @@ tile_set = SubResource("TileSet_i2t4f")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(640, 560)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_0b4ue")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="StaticBody2D/CollisionShape2D"]
+[node name="TileMapLayer" type="TileMapLayer" parent="StaticBody2D"]
 texture_filter = 1
 position = Vector2(-640, -560)
 scale = Vector2(5, 5)
