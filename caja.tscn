@@ -11,12 +11,12 @@ size = Vector2(80, 80)
 [node name="cajaArea" type="Area2D" parent="."]
 script = ExtResource("1_43avb")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="cajaArea"]
+shape = SubResource("RectangleShape2D_43avb")
+
 [node name="Sprite2D" type="Sprite2D" parent="cajaArea"]
 texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("1_a7ipy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cajaArea"]
-shape = SubResource("RectangleShape2D_43avb")
 
 [connection signal="area_entered" from="cajaArea" to="cajaArea" method="_on_area_entered"]

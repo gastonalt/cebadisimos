@@ -30,7 +30,7 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_km5ld")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2txt"]
 texture = ExtResource("1_u52ul")
 0:0/0 = 0
 1:0/0 = 0
@@ -182,7 +182,7 @@ texture = ExtResource("1_u52ul")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_vonw3")
+sources/0 = SubResource("TileSetAtlasSource_f2txt")
 
 [node name="Level" type="Node2D"]
 
