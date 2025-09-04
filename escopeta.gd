@@ -17,9 +17,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var prefix = "p%d_" % player_id
 	if Input.is_action_just_pressed(prefix + "shoot") and not disparando:
+		anim.frame = 1 ## Para que se llegue a ver el disparo
 		disparando = true
-		area.scale = Vector2(max_scale, max_scale)
 		anim.play("shooting_escopeta")
+		area.scale = Vector2(max_scale, max_scale)
 		
 		for body in area.get_overlapping_bodies():
 			if body.is_in_group("jugadores") and body.player_id != player_id:
