@@ -7,7 +7,7 @@ var direction: int;
 ## @export var canShoot = false
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -600.0
 
 func _ready() -> void:
 	var path = "res://player%d.png" % player_id
@@ -43,3 +43,9 @@ func _physics_process(delta: float) -> void:
 ##		pass
 
 	move_and_slide()
+
+
+func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+	await get_tree().create_timer(1.0).timeout
+	queue_free()
+	pass # Replace with function body.

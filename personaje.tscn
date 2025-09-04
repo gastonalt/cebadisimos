@@ -118,3 +118,9 @@ autoplay = "iddle"
 
 [node name="arma_holder" type="Marker2D" parent="."]
 position = Vector2(2.75, 8.5)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-5.96046e-08, -2.38419e-07)
+scale = Vector2(1.6, 1.8)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
