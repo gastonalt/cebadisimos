@@ -42,9 +42,12 @@ size_flags_vertical = 4
 text = "SIG >"
 
 [node name="readyButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 text = "LISTO"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PrevBtn" to="." method="_on_prev_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/NextBtn" to="." method="_on_next_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/readyButton" to="." method="_on_ready_button_pressed"]

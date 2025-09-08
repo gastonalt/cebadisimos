@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://8u2opsvcaur3" path="res://seleccionar_jugador.tscn" id="1_ek5dk"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="seleccionar_jugador_menu" type="CanvasLayer"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 8

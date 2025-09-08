@@ -1,6 +1,6 @@
 extends Node
-
-signal jugador_muerto(player_id: int)
+var playerSkin = ["player1.png", "player1.png"]
+var playerReady = [false, false]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,8 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var jugadores = get_tree().get_nodes_in_group("jugadores");
-	if jugadores and jugadores.size() < 2:
-		print("El jugador " + jugadores.get(0).name + " gana!")
-		get_tree().reload_current_scene()
-		pass
+	pass
