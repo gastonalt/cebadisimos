@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c5bcfbsej06m0"]
+
+[ext_resource type="Texture2D" uid="uid://cedjm8ujewuf7" path="res://button byCalasonic.png" id="1_2krdf"]
+[ext_resource type="FontFile" uid="uid://d0e62a4iu1n6l" path="res://The Rolling Stone.ttf" id="2_bbxmk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bbxmk"]
+texture = ExtResource("1_2krdf")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[resource]
+default_font = ExtResource("2_bbxmk")
+Button/font_sizes/font_size = 32
+Button/styles/normal = SubResource("StyleBoxTexture_bbxmk")
+Label/font_sizes/font_size = 48

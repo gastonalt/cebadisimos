@@ -10,7 +10,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var jugadores = get_tree().get_nodes_in_group("jugadores");
-	if jugadores.size() < 2:
+	if jugadores and jugadores.size() < 2:
 		print("El jugador " + jugadores.get(0).name + " gana!")
 		get_tree().reload_current_scene()
 		pass
