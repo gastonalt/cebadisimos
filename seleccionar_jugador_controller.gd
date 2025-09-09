@@ -6,6 +6,7 @@ extends MarginContainer
 @onready var previoBtn: Button = $VBoxContainer/HBoxContainer/PrevBtn
 @onready var titulo: Label = $VBoxContainer/Titulo
 @export var id_jugador: int = -1
+@onready var cuentaAtras: Label = $"../../CuentaAtras"
 
 var index = 0
 var isPlayerReady = false
@@ -70,6 +71,19 @@ func _on_ready_button_pressed() -> void:
 		GlobalPlayerInfo.playerReady[id_jugador - 1] = false
 	_check_both_ready()
 
+func _start_countdown() -> void:
+	var tiempo = 3
+	cuentaAtras.visible = true
+	
+	while tiempo > 0:
+		cuentaAtras.text = "El juego comienza en %d..." % tiempo
+		await get_tree().create_timer(1.0).timeout
+		tiempo -= 1
+	
+	cuentaAtras.text = "¡A jugar!"
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://level.tscn")
+
 func _check_both_ready() -> void:
 	if GlobalPlayerInfo.playerReady[0] and GlobalPlayerInfo.playerReady[1]:
-		get_tree().change_scene_to_file("res://level.tscn")
+		_start_countdown()

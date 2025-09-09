@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://be6s76wssnhma"]
+[gd_scene load_steps=18 format=3 uid="uid://be6s76wssnhma"]
 
 [ext_resource type="Script" uid="uid://dqrtmh7st8jx2" path="res://personaje.gd" id="1_yppqc"]
+[ext_resource type="Texture2D" uid="uid://cukbglmwix0yu" path="res://player1.png" id="2_ck3sb"]
 [ext_resource type="Texture2D" uid="uid://bsg41ovyo8a6y" path="res://Idle (32x32).png" id="2_gj0cs"]
 [ext_resource type="Texture2D" uid="uid://5jattyk2w31g" path="res://Jump (32x32).png" id="3_ck3sb"]
 
@@ -108,6 +109,7 @@ shape = SubResource("RectangleShape2D_cx4ix")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+texture = ExtResource("2_ck3sb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
