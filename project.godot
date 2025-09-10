@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cebadísimos"
-run/main_scene="res://level.tscn"
+run/main_scene="uid://c34jhy5n1vc5b"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
