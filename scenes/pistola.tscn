@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dt1qhcq3gely"]
+
+[ext_resource type="Texture2D" uid="uid://b62f5sxi7aoyw" path="res://sprites/pistola byCalasonic.png" id="1_5krjw"]
+[ext_resource type="Script" uid="uid://d0g6m543hkp0r" path="res://scripts/pistola.gd" id="1_37mnn"]
+[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="2_37mnn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pcjl"]
+atlas = ExtResource("2_37mnn")
+region = Rect2(448, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bulvi"]
+atlas = ExtResource("2_37mnn")
+region = Rect2(480, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmbf3"]
+atlas = ExtResource("2_37mnn")
+region = Rect2(512, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlgde"]
+atlas = ExtResource("2_37mnn")
+region = Rect2(544, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47or8"]
+atlas = ExtResource("2_37mnn")
+region = Rect2(576, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdkys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pcjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bulvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmbf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlgde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47or8")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"shooting",
+"speed": 25.0
+}]
+
+[node name="pistola" type="Node2D"]
+script = ExtResource("1_37mnn")
+
+[node name="textura" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_5krjw")
+
+[node name="disparo_animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(17, -2)
+scale = Vector2(0.59375, 0.59375)
+sprite_frames = SubResource("SpriteFrames_rdkys")
+animation = &"shooting"
+frame = 6
+frame_progress = 1.0
+flip_h = true

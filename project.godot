@@ -13,12 +13,12 @@ config_version=5
 config/name="Cebadísimos"
 run/main_scene="uid://c34jhy5n1vc5b"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://sprites/icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
-GlobalPlayerInfo="*res://GlobalPlayerInfo.gd"
+GameManager="*res://scripts/GameManager.gd"
+GlobalPlayerInfo="*res://scripts/GlobalPlayerInfo.gd"
 
 [display]
 
