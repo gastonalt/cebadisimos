@@ -4,7 +4,7 @@ extends Node2D
 @export var player_id: int = 1
 
 var disparando := false
-var bullet_scene: PackedScene = preload("res://bala.tscn")
+var bullet_scene: PackedScene = preload("res://scenes/bala.tscn")
 
 func _process(delta: float) -> void:
 	var prefix = "p%d_" % player_id

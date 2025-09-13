@@ -10,6 +10,7 @@ extends MarginContainer
 
 var index = 0
 var isPlayerReady = false
+var tiempo = 3
 
 const textures = [
 	"player1.png", "player2.png", "player3.png",
@@ -21,8 +22,8 @@ func _ready() -> void:
 	_change_texture(textures[index])
 
 func _change_texture(txname: String) -> void:
-	textureNode.texture = load("res://" + txname)
-	GlobalPlayerInfo.playerSkin[id_jugador - 1] = txname
+	textureNode.texture = load("res://sprites/" + txname)
+	GlobalPlayerInfo.jugadores[id_jugador - 1].player_skin = txname
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -63,27 +64,37 @@ func _on_ready_button_pressed() -> void:
 		siguienteBtn.disabled = true
 		previoBtn.disabled = true
 		readyBtn.text = "CAMBIAR"
-		GlobalPlayerInfo.playerReady[id_jugador - 1] = true
+		GlobalPlayerInfo.jugadores[id_jugador - 1].is_ready = true
 	else:
 		readyBtn.text = "LISTO"
 		siguienteBtn.disabled = false
 		previoBtn.disabled = false
-		GlobalPlayerInfo.playerReady[id_jugador - 1] = false
+		GlobalPlayerInfo.jugadores[id_jugador - 1].is_ready = false
 	_check_both_ready()
 
-func _start_countdown() -> void:
-	var tiempo = 3
-	cuentaAtras.visible = true
-	
-	while tiempo > 0:
-		cuentaAtras.text = "El juego comienza en %d..." % tiempo
-		await get_tree().create_timer(1.0).timeout
-		tiempo -= 1
-	
-	cuentaAtras.text = "¡A jugar!"
-	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("res://level.tscn")
+
+var countdown_active = false
 
 func _check_both_ready() -> void:
-	if GlobalPlayerInfo.playerReady[0] and GlobalPlayerInfo.playerReady[1]:
-		_start_countdown()
+	tiempo = 3
+	if GlobalPlayerInfo.jugadores[0].is_ready and GlobalPlayerInfo.jugadores[1].is_ready:
+		countdown_active = true
+		cuentaAtras.visible = true
+		while tiempo > 0 and countdown_active:
+			cuentaAtras.text = "El juego comienza en %d..." % tiempo
+			await get_tree().create_timer(1.0).timeout
+			tiempo -= 1
+			# Si algún jugador deja de estar listo, cancelar
+			if not (GlobalPlayerInfo.jugadores[0].is_ready and GlobalPlayerInfo.jugadores[1].is_ready):
+				countdown_active = false
+				break
+		if countdown_active:
+			cuentaAtras.text = "¡A jugar!"
+			await get_tree().create_timer(1.0).timeout
+			get_tree().change_scene_to_file("res://scenes/level.tscn")
+		else:
+			cuentaAtras.visible = false
+	else:
+		countdown_active = false
+		tiempo = 3
+		cuentaAtras.visible = false

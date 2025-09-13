@@ -17,8 +17,8 @@ config/icon="res://sprites/icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/GameManager.gd"
-GlobalPlayerInfo="*res://scripts/GlobalPlayerInfo.gd"
+GameManager="*res://scripts/globals/GameManager.gd"
+GlobalPlayerInfo="*res://scripts/globals/GlobalPlayerInfo.gd"
 
 [display]
 

@@ -10,7 +10,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 
 func _ready() -> void:
-	var path = "res://" + GlobalPlayerInfo.playerSkin[player_id - 1]
+	# cargo la skin del jugador
+
+	var path = "res://sprites/" + GlobalPlayerInfo.jugadores[player_id - 1].player_skin
 	var tex = load(path)
 	sprite.texture = tex
 

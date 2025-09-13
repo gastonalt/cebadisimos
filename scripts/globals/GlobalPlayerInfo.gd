@@ -1,6 +1,9 @@
 extends Node
-var playerSkin = ["player1.png", "player1.png"]
-var playerReady = [false, false]
+
+const Personaje = preload("res://scripts/clases/Personaje.gd")
+var jugador = Personaje.new()
+
+var jugadores = [Personaje.new(), Personaje.new()]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
