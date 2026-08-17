@@ -1,71 +1,96 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt1qhcq3gely"]
+[gd_scene load_steps=14 format=3 uid="uid://dt1qhcq3gely"]
 
-[ext_resource type="Texture2D" uid="uid://b62f5sxi7aoyw" path="res://sprites/pistola byCalasonic.png" id="1_5krjw"]
-[ext_resource type="Script" uid="uid://d0g6m543hkp0r" path="res://scripts/pistola.gd" id="1_37mnn"]
-[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="2_37mnn"]
+[ext_resource type="Texture2D" uid="uid://b62f5sxi7aoyw" path="res://sprites/pistola byCalasonic.png" id="1_pistol_tex"]
+[ext_resource type="Script" uid="uid://d0g6m543hkp0r" path="res://scripts/pistola.gd" id="2_pistol_script"]
+[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="3_fire_tex"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8pcjl"]
-atlas = ExtResource("2_37mnn")
+[sub_resource type="AtlasTexture" id="Atlas_fire0"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(448, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bulvi"]
-atlas = ExtResource("2_37mnn")
+[sub_resource type="AtlasTexture" id="Atlas_fire1"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(480, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmbf3"]
-atlas = ExtResource("2_37mnn")
+[sub_resource type="AtlasTexture" id="Atlas_fire2"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(512, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wlgde"]
-atlas = ExtResource("2_37mnn")
+[sub_resource type="AtlasTexture" id="Atlas_fire3"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(544, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_47or8"]
-atlas = ExtResource("2_37mnn")
+[sub_resource type="AtlasTexture" id="Atlas_fire4"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(576, 192, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rdkys"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pfire"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": null
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8pcjl")
+"texture": SubResource("Atlas_fire0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bulvi")
+"texture": SubResource("Atlas_fire1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bmbf3")
+"texture": SubResource("Atlas_fire2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wlgde")
+"texture": SubResource("Atlas_fire3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_47or8")
+"texture": SubResource("Atlas_fire4")
 }, {
 "duration": 1.0,
 "texture": null
 }],
 "loop": false,
-"name": &"shooting",
+"name": &"fire",
 "speed": 25.0
 }]
 
-[node name="pistola" type="Node2D"]
-script = ExtResource("1_37mnn")
+[node name="Pistola" type="Node2D"]
+script = ExtResource("2_pistol_script")
 
-[node name="textura" type="Sprite2D" parent="."]
+[node name="WeaponSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_5krjw")
+texture = ExtResource("1_pistol_tex")
 
-[node name="disparo_animation" type="AnimatedSprite2D" parent="."]
+[node name="FireEffect" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(17, -2)
+position = Vector2(13, -5)
 scale = Vector2(0.59375, 0.59375)
-sprite_frames = SubResource("SpriteFrames_rdkys")
-animation = &"shooting"
+sprite_frames = SubResource("SpriteFrames_pfire")
+animation = &"fire"
 frame = 6
 frame_progress = 1.0
-flip_h = true
+
+[node name="MuzzlePoint" type="Marker2D" parent="."]
+position = Vector2(13, -5)
+
+[node name="EjectionPoint" type="Marker2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="RightGripPoint" type="Marker2D" parent="."]
+position = Vector2(4, 7)
+
+[node name="LeftGripPoint" type="Marker2D" parent="."]
+position = Vector2(2, 7)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_sm")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_widle")
+
+[node name="Fire" type="Node" parent="StateMachine"]
+script = ExtResource("5_wfire")
+
+[connection signal="animation_finished" from="FireEffect" to="." method="_on_fire_effect_finished"]

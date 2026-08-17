@@ -1,80 +1,104 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn7sg5avpausj"]
+[gd_scene load_steps=14 format=3 uid="uid://dn7sg5avpausj"]
 
-[ext_resource type="Script" uid="uid://c7m3knyafvu0q" path="res://scripts/escopeta.gd" id="1_2ij0y"]
-[ext_resource type="Texture2D" uid="uid://c2sl3flbcl1lc" path="res://sprites/escopeta byCalasonic.png" id="2_kfevs"]
-[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="3_5878n"]
+[ext_resource type="Texture2D" uid="uid://c2sl3flbcl1lc" path="res://sprites/escopeta byCalasonic.png" id="1_shot_tex"]
+[ext_resource type="Script" uid="uid://c7m3knyafvu0q" path="res://scripts/escopeta.gd" id="2_shot_script"]
+[ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="3_fire_tex"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_47or8"]
-atlas = ExtResource("3_5878n")
+[sub_resource type="AtlasTexture" id="Atlas_fire0"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(576, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wlgde"]
-atlas = ExtResource("3_5878n")
+[sub_resource type="AtlasTexture" id="Atlas_fire1"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(544, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmbf3"]
-atlas = ExtResource("3_5878n")
+[sub_resource type="AtlasTexture" id="Atlas_fire2"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(512, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bulvi"]
-atlas = ExtResource("3_5878n")
+[sub_resource type="AtlasTexture" id="Atlas_fire3"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(480, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8pcjl"]
-atlas = ExtResource("3_5878n")
+[sub_resource type="AtlasTexture" id="Atlas_fire4"]
+atlas = ExtResource("3_fire_tex")
 region = Rect2(448, 192, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_uwfed"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_sfire"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": null
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_47or8")
+"texture": SubResource("Atlas_fire0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wlgde")
+"texture": SubResource("Atlas_fire1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bmbf3")
+"texture": SubResource("Atlas_fire2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bulvi")
+"texture": SubResource("Atlas_fire3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8pcjl")
+"texture": SubResource("Atlas_fire4")
 }, {
 "duration": 1.0,
 "texture": null
 }],
 "loop": false,
-"name": &"shooting_escopeta",
+"name": &"fire",
 "speed": 25.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uya3a"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_area"]
 
-[node name="escopeta" type="Node2D"]
-script = ExtResource("1_2ij0y")
+[node name="Escopeta" type="Node2D"]
+script = ExtResource("2_shot_script")
 
-[node name="textura" type="Sprite2D" parent="."]
+[node name="WeaponSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_kfevs")
+texture = ExtResource("1_shot_tex")
 
-[node name="disparo_animation" type="AnimatedSprite2D" parent="."]
+[node name="FireEffect" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(29, -3)
-scale = Vector2(0.59375, 0.59375)
-sprite_frames = SubResource("SpriteFrames_uwfed")
-animation = &"shooting_escopeta"
-flip_h = true
+position = Vector2(34, -5)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_sfire")
+animation = &"fire"
+frame = 6
 
-[node name="areaImpacto" type="Area2D" parent="."]
-position = Vector2(25, -3)
+[node name="MuzzlePoint" type="Marker2D" parent="."]
+position = Vector2(34, -5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="areaImpacto"]
-shape = SubResource("CircleShape2D_uya3a")
+[node name="EjectionPoint" type="Marker2D" parent="."]
+position = Vector2(0, -3)
 
-[connection signal="animation_finished" from="disparo_animation" to="." method="_on_disparo_animation_animation_finished"]
-[connection signal="body_entered" from="areaImpacto" to="." method="_on_area_impacto_body_entered"]
+[node name="RightGripPoint" type="Marker2D" parent="."]
+position = Vector2(3, 6)
+
+[node name="LeftGripPoint" type="Marker2D" parent="."]
+position = Vector2(15, 6)
+
+[node name="AreaImpacto" type="Area2D" parent="."]
+position = Vector2(34, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaImpacto"]
+shape = SubResource("CircleShape2D_area")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_sm")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_widle")
+
+[node name="Fire" type="Node" parent="StateMachine"]
+script = ExtResource("5_wfire")
+
+[connection signal="animation_finished" from="FireEffect" to="." method="_on_fire_effect_finished"]
+[connection signal="body_entered" from="AreaImpacto" to="." method="_on_area_impacto_body_entered"]

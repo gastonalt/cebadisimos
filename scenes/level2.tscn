@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bomchkr6yq5rd" path="res://sprites/Terrain (16x16).png" id="1_r40rm"]
 [ext_resource type="PackedScene" uid="uid://be6s76wssnhma" path="res://scenes/personaje.tscn" id="2_6q4t8"]
 [ext_resource type="PackedScene" uid="uid://ca7h5ne1as215" path="res://scenes/caja_con_arma.tscn" id="3_8tcn8"]
+[ext_resource type="PackedScene" uid="uid://d4jwefd5rrict" path="res://scenes/camera.tscn" id="4_cam"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r6vdu"]
 texture = ExtResource("1_8tcn8")
@@ -201,3 +202,5 @@ position = Vector2(323, 224)
 
 [node name="CajaConArma2" parent="." instance=ExtResource("3_8tcn8")]
 position = Vector2(774, 144)
+
+[node name="Camera" parent="." instance=ExtResource("4_cam")]

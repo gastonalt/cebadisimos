@@ -201,11 +201,11 @@ tile_set = SubResource("TileSet_oi3di")
 position = Vector2(942, 343)
 
 [node name="player1" parent="." instance=ExtResource("6_1ainy")]
-position = Vector2(202, 232)
+position = Vector2(200, 350)
 scale = Vector2(4, 4)
 
 [node name="player2" parent="." instance=ExtResource("6_1ainy")]
-position = Vector2(875, 156)
+position = Vector2(900, 350)
 scale = Vector2(4, 4)
 player_id = 2
 

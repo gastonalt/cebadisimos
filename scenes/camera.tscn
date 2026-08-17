@@ -5,4 +5,8 @@
 [node name="Camera" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(580, 280)
+zoom = Vector2(0.55, 0.55)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("1_u5kg4")

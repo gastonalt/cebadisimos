@@ -26,7 +26,7 @@ func _change_texture(txname: String) -> void:
 	GlobalPlayerInfo.jugadores[id_jugador - 1].player_skin = txname
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var prefix = "p%d_" % id_jugador
 	if Input.is_action_just_pressed(prefix + "left") and !isPlayerReady:
 		previous()
@@ -91,6 +91,8 @@ func _check_both_ready() -> void:
 		if countdown_active:
 			cuentaAtras.text = "¡A jugar!"
 			await get_tree().create_timer(1.0).timeout
+			GlobalPlayerInfo.reset_for_new_round()
+			GameState.change_state(GameState.State.PLAYING)
 			get_tree().change_scene_to_file("res://scenes/level.tscn")
 		else:
 			cuentaAtras.visible = false

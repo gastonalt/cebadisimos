@@ -1,21 +1,40 @@
-extends Node2D
+extends WeaponBase
 
-@onready var anim = $disparo_animation
-@export var player_id: int = 1
+## Pistol — ranged weapon that fires bullets.
+## Uses the WeaponBase state machine for fire/reload.
 
-var disparando := false
 var bullet_scene: PackedScene = preload("res://scenes/bala.tscn")
+var fire_texture: Texture2D = preload("res://sprites/All_Fire_Bullet_Pixel_16x16.png")
 
-func _process(delta: float) -> void:
-	var prefix = "p%d_" % player_id
-	if Input.is_action_just_pressed(prefix + "shoot"):
-		_disparar()
+const RECOIL_KICK: float = 6.0
+const TEXTURA_DEFAULT_X: float = 0.0
 
-func _disparar() -> void:
+func _ready() -> void:
+	weapon_name = "pistola"
+	super._ready()
+
+func _on_fire() -> void:
+	# Spawn bullet
 	var bala = bullet_scene.instantiate()
-	bala.global_position = global_position  # donde está el arma
-	bala.rotation = rotation                # hacia donde apunta el arma/jugador
-	bala.get_node("bala").player_id = player_id              # para que no se mate a sí mismo
 	get_tree().current_scene.add_child(bala)
+	bala.global_position = muzzle_point.global_position
+	bala.get_node("bala").player_id = player_id
 
-	anim.play("shooting_escopeta")
+	# Effects
+	EffectsManager.spawn_muzzle_smoke(muzzle_point.global_position, get_dir(), 5)
+	EffectsManager.spawn_shell_casing(ejection_point.global_position, get_dir())
+	EffectsManager.shake(4.0, 0.1)
+
+	# Recoil animation
+	_play_recoil()
+
+func _on_fire_effect_finished() -> void:
+	fire_effect.stop()
+	fire_effect.frame = 0
+
+func _play_recoil() -> void:
+	if weapon_sprite == null:
+		return
+	var tween = create_tween()
+	tween.tween_property(weapon_sprite, "position:x", TEXTURA_DEFAULT_X - RECOIL_KICK, 0.03)
+	tween.tween_property(weapon_sprite, "position:x", TEXTURA_DEFAULT_X, 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

@@ -1,41 +1,65 @@
-extends Node2D
+extends WeaponBase
 
-@onready var area = $areaImpacto
-@onready var anim = $disparo_animation
-@export var player_id: int = 1
+## Shotgun — area-based weapon with melee range.
+## Uses the WeaponBase state machine for fire/reload.
 
-var disparando := false
-var velocidad_crecimiento := 5.0
-var max_scale := 1.0
+@onready var area_impacto: Area2D = $AreaImpacto
 
-# Called when the node enters the scene tree for the first time.
+var fire_texture: Texture2D = preload("res://sprites/All_Fire_Bullet_Pixel_16x16.png")
+
+const RECOIL_KICK: float = 10.0
+const TEXTURA_DEFAULT_X: float = 0.0
+
+var _area_active: bool = false
+var _area_timer: float = 0.0
+const AREA_DURATION: float = 0.15
+
 func _ready() -> void:
-	area.scale = Vector2.ZERO
-	pass # Replace with function body.
+	weapon_name = "escopeta"
+	area_impacto.scale = Vector2.ZERO
+	super._ready()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var prefix = "p%d_" % player_id
-	if Input.is_action_just_pressed(prefix + "shoot") and not disparando:
-		anim.frame = 1 ## Para que se llegue a ver el disparo
-		disparando = true
-		anim.play("shooting_escopeta")
-		area.scale = Vector2(max_scale, max_scale)
-		
-		for body in area.get_overlapping_bodies():
-			if body.is_in_group("jugadores") and body.player_id != player_id:
-				body.queue_free()
-		
-	if disparando:
-		area.scale += Vector2.ONE * (-velocidad_crecimiento) * delta
-		
-		if area.scale.x <= 0:
-			disparando = false
-			area.scale = Vector2.ZERO
+	if _area_active:
+		_area_timer -= delta
+		area_impacto.scale = Vector2.ONE * (_area_timer / AREA_DURATION)
+		if _area_timer <= 0.0:
+			_area_active = false
+			area_impacto.scale = Vector2.ZERO
 
-func _on_disparo_animation_animation_finished() -> void:
-	anim.stop()
+func _on_fire() -> void:
+	_area_active = true
+	_area_timer = AREA_DURATION
+	area_impacto.scale = Vector2.ONE
+
+	# Effects
+	EffectsManager.spawn_muzzle_smoke(muzzle_point.global_position, get_dir(), 8)
+	EffectsManager.spawn_shell_casing(ejection_point.global_position, get_dir())
+	EffectsManager.shake(8.0, 0.2)
+	EffectsManager.hitlag(0.05)
+
+	# Recoil
+	_play_recoil()
+
+	# Immediate area damage
+	for body in area_impacto.get_overlapping_bodies():
+		if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive:
+			EffectsManager.hitlag(0.05)
+			body.die()
 
 func _on_area_impacto_body_entered(body: Node2D) -> void:
-	if body.player_id != player_id and disparando:
-		body.queue_free()
+	if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive and _area_active:
+		EffectsManager.hitlag(0.05)
+		body.die()
+
+func _on_fire_effect_finished() -> void:
+	fire_effect.stop()
+	fire_effect.frame = 0
+
+func _play_recoil() -> void:
+	if weapon_sprite == null:
+		return
+	var tween = create_tween()
+	tween.tween_property(weapon_sprite, "position:x", TEXTURA_DEFAULT_X - RECOIL_KICK, 0.04)
+	tween.tween_property(weapon_sprite, "position:x", TEXTURA_DEFAULT_X - 3.0, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(weapon_sprite, "position:x", TEXTURA_DEFAULT_X, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
