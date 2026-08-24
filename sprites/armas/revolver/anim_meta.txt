@@ -1,0 +1,10 @@
+weapon=revolver
+source=lucas-kawano-revolver-fire-anim2.gif
+frames=54
+frame_size=1000x400
+sheet=54000x400
+content_bbox=x=0,y=0,w=1000,h=400
+fps_recommended=10
+delays_ms=100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+background_keyed=true (flood-fill desde bordes, tolerancia=60)
+content_bbox_keyed=x=0,y=0,w=1000,h=400

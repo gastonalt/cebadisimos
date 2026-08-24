@@ -1,0 +1,10 @@
+weapon=lmg
+source=ufsfjcn8iupe1.gif
+frames=46
+frame_size=768x384
+sheet=35328x384
+content_bbox=x=0,y=0,w=768,h=384
+fps_recommended=10
+delays_ms=100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+background_keyed=true (flood-fill desde bordes, tolerancia=60)
+content_bbox_keyed=x=0,y=0,w=768,h=384

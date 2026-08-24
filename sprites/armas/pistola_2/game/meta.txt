@@ -1,0 +1,17 @@
+weapon=pistola_2
+fuente=w9v8gnqzbwfb1.gif (7 frames, 512x512)
+procesamiento=v2: barra de colores eliminada (y>=400 borrada) -> crop(32,96,400x208) -> downscale /16 -> 25x13 px
+orientacion_original=canon apunta IZQUIERDA -> flip_h=true en escena
+animacion=fire (7 frames @ 25fps = 0.28s), recoil horneado en el gif
+pistola_real_en_gif=(192,208)-(367,303) | fogonazo pico frame_03 llega hasta x=32
+anclas_escena_locales (v2, sobre pistola real):
+  MuzzlePoint=2.5,2.2 (punta canon, raw 192,235)
+  RightGripPoint=-6.8,6.2 (empuñadura trasera descendente, raw 340,300)
+  EjectionPoint=-3,0.8 (ventana eyeccion, raw 280,212)
+  LeftGripPoint=0.1,5.9 (apoyo frontal bajo canion, raw 230,295)
+coordinacion:
+  - bala spawnea en muzzle_point global en frame 0
+  - recoil codigo: kick local x-2px @0.04s + return 0.18s (acompaña al gif)
+  - WeaponSprite se oculta durante fire; FireEffect muestra los 7 frames
+  - fired.emit() -> squash del personaje
+caja_tipo=3

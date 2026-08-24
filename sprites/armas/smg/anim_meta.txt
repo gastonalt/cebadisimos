@@ -1,0 +1,10 @@
+weapon=smg
+source=original-f649a175a76ab1821a2fef8299922a8a.gif
+frames=4
+frame_size=800x600
+sheet=3200x600
+content_bbox=x=0,y=0,w=800,h=600
+fps_recommended=10
+delays_ms=100,100,100,100
+background_keyed=true (flood-fill desde bordes, tolerancia=60)
+content_bbox_keyed=x=0,y=0,w=800,h=600

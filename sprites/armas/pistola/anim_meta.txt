@@ -1,0 +1,10 @@
+weapon=pistola
+source=ER46wpV.gif
+frames=7
+frame_size=300x300
+sheet=2100x300
+content_bbox=x=0,y=0,w=300,h=300
+fps_recommended=12.5
+delays_ms=80,80,80,80,80,80,80
+background_keyed=true (flood-fill desde bordes, tolerancia=60)
+content_bbox_keyed=x=0,y=0,w=300,h=300

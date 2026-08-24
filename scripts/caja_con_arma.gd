@@ -31,6 +31,8 @@ func _on_body_entered(body: Node2D) -> void:
 			weapon_scene = load("res://scenes/pistola.tscn")
 		2:
 			weapon_scene = load("res://scenes/escopeta.tscn")
+		3:
+			weapon_scene = load("res://scenes/pistola_2.tscn")
 		_:
 			weapon_scene = load("res://scenes/pistola.tscn")
 

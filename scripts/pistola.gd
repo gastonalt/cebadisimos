@@ -14,6 +14,9 @@ func _ready() -> void:
 	super._ready()
 
 func _on_fire() -> void:
+	# Squash del personaje sincronizado con el disparo
+	fired.emit()
+
 	# Spawn bullet
 	var bala = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bala)

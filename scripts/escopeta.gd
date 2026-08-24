@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 			area_impacto.scale = Vector2.ZERO
 
 func _on_fire() -> void:
+	fired.emit()
+
 	_area_active = true
 	_area_timer = AREA_DURATION
 	area_impacto.scale = Vector2.ONE

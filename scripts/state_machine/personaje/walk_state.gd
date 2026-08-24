@@ -35,10 +35,12 @@ func physics_update(delta: float) -> StringName:
 	ch.left_hand.scale.x = dir
 	var speed = ch.CROUCH_SPEED if ch.is_crouching else ch.SPEED
 	ch.velocity.x = move_toward(ch.velocity.x, dir * speed, ch.ACCELERATION * delta)
+	# Animación adaptativa: camina más rápido -> anima más rápido
+	body_sprite.speed_scale = clampf(abs(ch.velocity.x) / float(speed), 0.6, 1.6)
 	return &""
 
 func exit() -> void:
-	pass
+	body_sprite.speed_scale = 1.0
 
 func _get_prefix() -> String:
 	return "p%d_" % _get_character().player_id

@@ -1,0 +1,10 @@
+weapon=pistola_2
+source=w9v8gnqzbwfb1.gif
+frames=7
+frame_size=512x512
+sheet=3584x512
+content_bbox=x=0,y=0,w=512,h=512
+fps_recommended=10
+delays_ms=100,100,100,100,100,100,100
+background_keyed=true (flood-fill desde bordes, tolerancia=60)
+content_bbox_keyed=x=0,y=0,w=512,h=512
