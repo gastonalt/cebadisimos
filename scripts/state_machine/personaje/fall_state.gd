@@ -5,7 +5,7 @@ extends BaseState
 @onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_rig.play("jump")  # reuse jump pose for falling
+	body_rig.play("fall")
 
 func physics_update(delta: float) -> StringName:
 	var p = _get_prefix()
