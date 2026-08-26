@@ -6,8 +6,16 @@ var direccion: int = 0
 var _trail_timer: float = 0.0
 var _direction_set: bool = false
 
+func setup(p_id: int, dir: int) -> void:
+	player_id = p_id
+	if dir != 0:
+		direccion = dir
+		_direction_set = true
+
 func _ready():
 	await get_tree().process_frame
+	if _direction_set:
+		return
 	var jugadores = get_tree().get_nodes_in_group("jugadores")
 	for j in jugadores:
 		if j.player_id == player_id:
@@ -39,7 +47,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not _direction_set:
 		return
-	if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive:
+	if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive and not body.is_invulnerable:
 		EffectsManager.hitlag(0.03)
 		body.die()
 		queue_free()

@@ -23,9 +23,9 @@ func _on_fire() -> void:
 
 	# Balita desde el cañón, coordinada con el frame 0 del fogonazo
 	var bala = BULLET_SCENE.instantiate()
+	bala.get_node("bala").setup(player_id, get_fire_dir())
 	get_tree().current_scene.add_child(bala)
 	bala.global_position = muzzle_point.global_position
-	bala.get_node("bala").player_id = player_id
 
 	# Efectos
 	EffectsManager.spawn_muzzle_smoke(muzzle_point.global_position, get_dir(), 5)

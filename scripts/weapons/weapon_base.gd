@@ -77,6 +77,13 @@ func start_cooldown() -> void:
 func get_dir() -> int:
 	return 1 if global_scale.x >= 0 else -1
 
+func get_fire_dir() -> int:
+	if weapon_owner != null and "direction" in weapon_owner:
+		var d = signi(int(weapon_owner.direction))
+		if d != 0:
+			return d
+	return get_dir()
+
 func get_muzzle_global() -> Vector2:
 	return muzzle_point.global_position
 

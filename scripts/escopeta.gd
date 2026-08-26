@@ -45,12 +45,12 @@ func _on_fire() -> void:
 
 	# Immediate area damage
 	for body in area_impacto.get_overlapping_bodies():
-		if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive:
+		if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive and not body.is_invulnerable:
 			EffectsManager.hitlag(0.05)
 			body.die()
 
 func _on_area_impacto_body_entered(body: Node2D) -> void:
-	if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive and _area_active:
+	if body.is_in_group("jugadores") and body.player_id != player_id and body.is_alive and not body.is_invulnerable and _area_active:
 		EffectsManager.hitlag(0.05)
 		body.die()
 

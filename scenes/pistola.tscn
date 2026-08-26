@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dt1qhcq3gely"]
+[gd_scene load_steps=13 format=3 uid="uid://dt1qhcq3gely"]
 
 [ext_resource type="Texture2D" uid="uid://b62f5sxi7aoyw" path="res://sprites/pistola byCalasonic.png" id="1_pistol_tex"]
 [ext_resource type="Script" uid="uid://d0g6m543hkp0r" path="res://scripts/pistola.gd" id="2_pistol_script"]
 [ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="3_fire_tex"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
+[ext_resource type="Script" uid="uid://c2l4ikkvhoy32" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
+[ext_resource type="Script" uid="uid://umby3m482kcr" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
+[ext_resource type="Script" uid="uid://c4bk6egkkhrbl" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
 
 [sub_resource type="AtlasTexture" id="Atlas_fire0"]
 atlas = ExtResource("3_fire_tex")
@@ -53,7 +53,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire",
-"speed": 25.0
+"speed": 20.0
 }]
 
 [node name="Pistola" type="Node2D"]
@@ -65,15 +65,15 @@ texture = ExtResource("1_pistol_tex")
 
 [node name="FireEffect" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(13, -5)
-scale = Vector2(0.59375, 0.59375)
+position = Vector2(18, -2)
+scale = Vector2(0.594, 0.594)
 sprite_frames = SubResource("SpriteFrames_pfire")
 animation = &"fire"
 frame = 6
 frame_progress = 1.0
 
 [node name="MuzzlePoint" type="Marker2D" parent="."]
-position = Vector2(13, -5)
+position = Vector2(9, -2)
 
 [node name="EjectionPoint" type="Marker2D" parent="."]
 position = Vector2(0, -3)
