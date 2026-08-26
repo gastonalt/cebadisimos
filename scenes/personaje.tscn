@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://be6s76wssnhma"]
+[gd_scene load_steps=28 format=3 uid="uid://be6s76wssnhma"]
 
 [ext_resource type="Script" uid="uid://dqrtmh7st8jx2" path="res://scripts/personaje.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://cu0s7arpa5dor" path="res://scripts/state_machine/personaje/idle_state.gd" id="4_idle_s"]
@@ -9,15 +9,19 @@
 [ext_resource type="Script" uid="uid://cyk50pb2mxd5x" path="res://scripts/state_machine/personaje/slide_state.gd" id="9_slide_s"]
 [ext_resource type="Script" uid="uid://wbegq64cxquk" path="res://scripts/state_machine/personaje/death_state.gd" id="10_death_s"]
 [ext_resource type="Script" uid="uid://c4bk6egkkhrbl" path="res://scripts/state_machine/state_machine.gd" id="11_sm"]
-[ext_resource type="Script" path="res://scripts/personaje_rig.gd" id="12_rig"]
+[ext_resource type="Script" uid="uid://k3yc4yqyvue" path="res://scripts/personaje_rig.gd" id="12_rig"]
 [ext_resource type="Texture2D" path="res://sprites/personaje/rig/pierna_izq.png" id="13_pizq"]
 [ext_resource type="Texture2D" path="res://sprites/personaje/rig/pierna_der.png" id="14_pder"]
-[ext_resource type="Texture2D" path="res://sprites/personaje/rig/torso.png" id="15_torso"]
-[ext_resource type="Texture2D" path="res://sprites/personaje/rig/brazo_izq.png" id="16_bizq"]
-[ext_resource type="Texture2D" path="res://sprites/personaje/rig/brazo_der.png" id="17_bder"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/tibia_izq.png" id="15_tizq"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/tibia_der.png" id="16_tder"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/torso.png" id="17_torso"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/brazo_izq.png" id="18_bizq"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/brazo_der.png" id="19_bder"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/antebrazo_izq.png" id="20_abizq"]
+[ext_resource type="Texture2D" path="res://sprites/personaje/rig/antebrazo_der.png" id="21_abder"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbox"]
-size = Vector2(32, 32)
+size = Vector2(16, 34)
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -72,7 +76,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PiernaDer:rotation")
+tracks/4/path = NodePath("PiernaIzq/RodillaIzq:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -84,7 +88,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("BrazoIzq:rotation")
+tracks/5/path = NodePath("PiernaDer:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -96,10 +100,58 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("BrazoDer:rotation")
+tracks/6/path = NodePath("PiernaDer/RodillaDer:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BrazoIzq:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BrazoIzq/CodoIzq:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BrazoDer:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BrazoDer/CodoDer:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -132,7 +184,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.07, 0.0]
+"values": [0.0, 0.06, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -144,12 +196,36 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.8, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.07, 0.0]
+"values": [0.0, -0.06, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BrazoIzq/CodoIzq:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.15, -0.25, -0.15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BrazoDer/CodoDer:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.15, 0.25, 0.15]
 }
 
 [sub_resource type="Animation" id="Animation_walk"]
 resource_name = "walk"
-length = 0.6
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -158,63 +234,111 @@ tracks/0/path = NodePath("PiernaIzq:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.38, 0.0, -0.38, 0.0, 0.38]
+"values": [-0.7, 0.0, 0.5, 0.0, -0.7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PiernaDer:rotation")
+tracks/1/path = NodePath("PiernaIzq/RodillaIzq:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.38, 0.0, 0.38, 0.0, -0.38]
+"values": [0.3, 0.9, 1.1, 0.5, 0.3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BrazoIzq:rotation")
+tracks/2/path = NodePath("PiernaDer:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.25, 0.0, 0.25, 0.0, -0.25]
+"values": [0.5, 0.0, -0.7, 0.0, 0.5]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BrazoDer:rotation")
+tracks/3/path = NodePath("PiernaDer/RodillaDer:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.25, 0.0, -0.25, 0.0, 0.25]
+"values": [1.1, 0.5, 0.3, 0.9, 1.1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:position")
+tracks/4/path = NodePath("BrazoIzq:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+"values": [0.55, 0.0, -0.55, 0.0, 0.55]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BrazoIzq/CodoIzq:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.0, -0.85, -0.7, -0.85, -1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BrazoDer:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.55, 0.0, 0.55, 0.0, -0.55]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BrazoDer/CodoDer:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.7, -0.85, -1.0, -0.85, -0.7]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jump"]
 resource_name = "jump"
-length = 0.25
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -222,46 +346,94 @@ tracks/0/path = NodePath("PiernaIzq:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.3]
+"values": [0.0, -0.9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PiernaDer:rotation")
+tracks/1/path = NodePath("PiernaIzq/RodillaIzq:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.25]
+"values": [0.0, 1.6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BrazoIzq:rotation")
+tracks/2/path = NodePath("PiernaDer:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.7]
+"values": [0.0, -0.5]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BrazoDer:rotation")
+tracks/3/path = NodePath("PiernaDer/RodillaDer:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.6]
+"values": [0.0, 1.3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BrazoIzq:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.3]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BrazoIzq/CodoIzq:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.6]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BrazoDer:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BrazoDer/CodoDer:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.5]
 }
 
 [sub_resource type="Animation" id="Animation_crouch"]
@@ -277,7 +449,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 2)]
+"values": [Vector2(0, 0), Vector2(0, 3)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -289,43 +461,67 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.35]
+"values": [0.0, -0.5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PiernaDer:rotation")
+tracks/2/path = NodePath("PiernaIzq/RodillaIzq:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.35]
+"values": [0.0, 1.2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BrazoIzq:rotation")
+tracks/3/path = NodePath("PiernaDer:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.15]
+"values": [0.0, 0.5]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("BrazoDer:rotation")
+tracks/4/path = NodePath("PiernaDer/RodillaDer:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.15]
+"values": [0.0, 1.2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BrazoIzq:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.4]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BrazoDer:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
 }
 
 [sub_resource type="Animation" id="Animation_die"]
@@ -353,7 +549,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 3)]
+"values": [Vector2(0, 0), Vector2(0, 4)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -365,7 +561,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.9]
+"values": [0.0, 1.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -377,7 +573,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.9]
+"values": [0.0, -1.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -389,7 +585,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.4]
+"values": [0.0, -0.5]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -398,6 +594,30 @@ tracks/5/path = NodePath("PiernaDer:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.5]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PiernaIzq/RodillaIzq:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PiernaDer/RodillaDer:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -418,6 +638,7 @@ _data = {
 script = ExtResource("1_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_hbox")
 
 [node name="StateMachine" type="Node" parent="."]
@@ -448,45 +669,82 @@ script = ExtResource("10_death_s")
 script = ExtResource("12_rig")
 
 [node name="PiernaIzq" type="Node2D" parent="Body"]
-position = Vector2(11, 28)
+position = Vector2(-4, -2)
 
 [node name="Sprite" type="Sprite2D" parent="Body/PiernaIzq"]
 texture_filter = 1
 texture = ExtResource("13_pizq")
 centered = false
-position = Vector2(-11, -28)
+position = Vector2(-20, -7)
+
+[node name="RodillaIzq" type="Node2D" parent="Body/PiernaIzq"]
+position = Vector2(0, 8)
+
+[node name="Sprite" type="Sprite2D" parent="Body/PiernaIzq/RodillaIzq"]
+texture_filter = 1
+texture = ExtResource("15_tizq")
+centered = false
+position = Vector2(-16, -5)
 
 [node name="PiernaDer" type="Node2D" parent="Body"]
-position = Vector2(21, 28)
+position = Vector2(4, -2)
 
 [node name="Sprite" type="Sprite2D" parent="Body/PiernaDer"]
 texture_filter = 1
 texture = ExtResource("14_pder")
 centered = false
-position = Vector2(-21, -28)
+position = Vector2(-12, -7)
+
+[node name="RodillaDer" type="Node2D" parent="Body/PiernaDer"]
+position = Vector2(0, 8)
+
+[node name="Sprite" type="Sprite2D" parent="Body/PiernaDer/RodillaDer"]
+texture_filter = 1
+texture = ExtResource("16_tder")
+centered = false
+position = Vector2(-16, -5)
 
 [node name="Torso" type="Sprite2D" parent="Body"]
 texture_filter = 1
-texture = ExtResource("15_torso")
+texture = ExtResource("17_torso")
 centered = false
+position = Vector2(-16, -24)
 
 [node name="BrazoIzq" type="Node2D" parent="Body"]
-position = Vector2(9, 13)
+position = Vector2(-7, -10)
 
 [node name="Sprite" type="Sprite2D" parent="Body/BrazoIzq"]
 texture_filter = 1
-texture = ExtResource("16_bizq")
+texture = ExtResource("18_bizq")
 centered = false
-position = Vector2(-9, -13)
+position = Vector2(-23, -15)
+
+[node name="CodoIzq" type="Node2D" parent="Body/BrazoIzq"]
+position = Vector2(0, 7)
+
+[node name="Sprite" type="Sprite2D" parent="Body/BrazoIzq/CodoIzq"]
+texture_filter = 1
+texture = ExtResource("20_abizq")
+centered = false
+position = Vector2(-16, -5)
 
 [node name="BrazoDer" type="Node2D" parent="Body"]
-position = Vector2(24, 25)
+position = Vector2(7, -10)
 
 [node name="Sprite" type="Sprite2D" parent="Body/BrazoDer"]
 texture_filter = 1
-texture = ExtResource("17_bder")
+texture = ExtResource("19_bder")
 centered = false
-position = Vector2(-24, -25)
+position = Vector2(-9, -15)
+
+[node name="CodoDer" type="Node2D" parent="Body/BrazoDer"]
+position = Vector2(0, 7)
+
+[node name="Sprite" type="Sprite2D" parent="Body/BrazoDer/CodoDer"]
+texture_filter = 1
+texture = ExtResource("21_abder")
+centered = false
+position = Vector2(-16, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 libraries = {
@@ -494,13 +752,13 @@ libraries = {
 }
 
 [node name="RightHand" type="Marker2D" parent="."]
-position = Vector2(9, 2)
+position = Vector2(7, 3)
 
 [node name="LeftHand" type="Marker2D" parent="."]
-position = Vector2(-2, 2)
+position = Vector2(-7, 3)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(-5.96046e-08, -2.38419e-07)
+position = Vector2(0, 0)
 scale = Vector2(1.6, 1.8)
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

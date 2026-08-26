@@ -28,29 +28,11 @@ const SQUASH_ON_LAND = Vector2(1.25, 0.75)
 const SQUASH_ON_JUMP = Vector2(0.8, 1.2)
 const SPAWN_INVULN_TIME = 1.5
 
-# Per-frame hitbox data — pixel (16,16) = node origin (0,0)
-const FRAME_HITBOXES = {
-	0: Vector4(24, 28, 1.5, 1.5),
-	1: Vector4(24, 28, 1.5, 1.5),
-	2: Vector4(24, 28, 1.5, 1.5),
-	3: Vector4(24, 29, 1.5, 1.0),
-	4: Vector4(24, 29, 1.5, 1.0),
-	5: Vector4(24, 30, 1.5, 0.5),
-	6: Vector4(24, 30, 1.5, 0.5),
-	7: Vector4(24, 30, 1.5, 0.5),
-	8: Vector4(24, 30, 1.5, 0.5),
-	9: Vector4(24, 29, 1.5, 1.0),
-	10: Vector4(24, 29, 1.5, 1.0),
-}
-
-const ANIM_TO_HITBOX = {
-	&"idle": 0,
-	&"walk": 0,
-	&"crouch": 0,
-	&"die": 8,
-}
-
-const JUMP_HITBOX = Vector4(24, 32, 1.5, -0.5)
+# Hitboxes basadas en el modelo del cuerpo (36px de alto: y -19..+16, pies en +16)
+# Vector4 = (ancho, alto, offset_x_centro, offset_y_centro)
+const STAND_HITBOX = Vector4(16, 34, 0, -1)
+const JUMP_HITBOX = Vector4(16, 30, 0, 1)
+const DIE_HITBOX = Vector4(18, 24, 0, 4)
 
 signal died(player_id: int)
 
@@ -90,9 +72,10 @@ func _on_rig_anim_started(anim: StringName) -> void:
 func _apply_hitbox_for_anim(anim: StringName) -> void:
 	if anim == &"jump" or anim == &"fall":
 		_set_hitbox(JUMP_HITBOX)
-		return
-	if ANIM_TO_HITBOX.has(anim):
-		_set_hitbox(FRAME_HITBOXES[ANIM_TO_HITBOX[anim]])
+	elif anim == &"die":
+		_set_hitbox(DIE_HITBOX)
+	else:
+		_set_hitbox(STAND_HITBOX)
 
 func _set_hitbox(data: Vector4) -> void:
 	var w = data.x
