@@ -1,6 +1,33 @@
-# Guía: Máquina de Estados + Armas acoplables
+# Guía: Máquina de Estados + Rig de personaje + Armas acoplables
 
 Cómo está armado el personaje y cómo editarlo sin romper nada.
+
+---
+
+## 0. El rig del personaje (paper-doll)
+
+El cuerpo ya NO es un AnimatedSprite2D con frames. Es un **rig de partes
+separadas** (`Body` en `personaje.tscn`), animado por un `AnimationPlayer`:
+
+```
+Body (Node2D, script personaje_rig.gd)   ← rig root: squash, tint, flash
+├── PiernaIzq  (Node2D pivot en cadera)  └─ Sprite (pierna_izq.png)
+├── PiernaDer  (Node2D pivot en cadera)  └─ Sprite (pierna_der.png)
+├── Torso      (Sprite2D)                ← cabeza+cebas+cara+body (torso.png)
+├── BrazoIzq   (Node2D pivot en hombro)  └─ Sprite (brazo_izq.png)
+├── BrazoDer   (Node2D pivot en hombro)  └─ Sprite (brazo_der.png)
+└── AnimationPlayer                      ← idle/walk/jump/crouch/die + RESET
+```
+
+- Los PNGs de las partes viven en `sprites/personaje/rig/`, cada uno en un
+  lienzo 32x32 en su posición original → para agregar una parte nueva, alinear
+  el sprite con `position = -pivot` y listo.
+- **Animar**: abrir `personaje.tscn` → `Body/AnimationPlayer` y editar las
+  pistas de `rotation` de los pivots (o `position` del root para el bob).
+- La API que usa la state machine sigue siendo la misma: `body_rig.play("walk")`
+  y `body_rig.speed_scale` (ver `personaje_rig.gd`).
+- Las hitboxes por animación se mapean en `personaje.gd`
+  (`ANIM_TO_HITBOX` + `_apply_hitbox_for_anim`).
 
 ---
 
@@ -58,7 +85,7 @@ var _timer := 0.0
 
 func enter(_data := {}) -> void:
     _timer = 0.15                      # dura 0.15 segundos
-    body_sprite.play("dash")           # tu animación en personaje.tscn
+    $"../../Body".play("dash")         # animación del rig en personaje.tscn
     owner.velocity.x = owner.body_node.scale.x * DASH_SPEED
 
 func physics_update(delta) -> StringName:
@@ -91,10 +118,10 @@ Constantes en `personaje.gd`:
 | `JUMP_VELOCITY` | -700 | fuerza del salto |
 
 - **Animación adaptativa**: en `walk_state.gd`, la línea
-  `body_sprite.speed_scale = clampf(...)` hace que el muñeco anime más rápido
+  `body_rig.speed_scale = clampf(...)` hace que el muñeco anime más rápido
   cuanto más rápido corre. Cambiá `0.6`/`1.6` para los límites.
-- Para editar frames/fps de una animación: abrir `personaje.tscn` →
-  `BodySprite` → SpriteFrames en el inspector (o menú Animations abajo).
+- Para editar las animaciones del rig: abrir `personaje.tscn` →
+  `Body/AnimationPlayer` (pista abajo, panel Animación).
 
 ## 5. Manos estilo Scribblenauts
 

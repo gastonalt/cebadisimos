@@ -2,10 +2,10 @@ extends BaseState
 
 ## Idle state — character standing still.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("idle")
+	body_rig.play("idle")
 
 func physics_update(delta: float) -> StringName:
 	var p = _get_prefix()

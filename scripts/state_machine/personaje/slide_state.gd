@@ -2,13 +2,13 @@ extends BaseState
 
 ## Slide state — character sliding along the ground. (Future feature)
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 var slide_timer: float = 0.0
 const SLIDE_DURATION: float = 0.35
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("crouch")  # placeholder — will be "slide" when art arrives
+	body_rig.play("crouch")  # placeholder — will be "slide" when the anim is authored
 	slide_timer = SLIDE_DURATION
 	var ch = _get_character()
 	ch.is_crouching = true

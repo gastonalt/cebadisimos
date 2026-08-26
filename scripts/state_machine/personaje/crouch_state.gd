@@ -2,10 +2,10 @@ extends BaseState
 
 ## Crouch state — character crouching.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("crouch")
+	body_rig.play("crouch")
 	_get_character().is_crouching = true
 
 func physics_update(delta: float) -> StringName:

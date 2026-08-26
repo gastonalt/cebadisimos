@@ -2,10 +2,10 @@ extends BaseState
 
 ## Fall state — character falling down.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("jump")  # reuse jump sprite for falling
+	body_rig.play("jump")  # reuse jump pose for falling
 
 func physics_update(delta: float) -> StringName:
 	var p = _get_prefix()

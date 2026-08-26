@@ -5,8 +5,6 @@ extends CharacterBody2D
 ## Body and face are separate nodes for independent animation/overlay.
 
 @onready var body_node: Node2D = $Body
-@onready var body_sprite: AnimatedSprite2D = $Body/BodySprite
-@onready var face_sprite: Sprite2D = $Body/FaceSprite
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var state_machine: StateMachine = $StateMachine
 @onready var right_hand: Marker2D = $RightHand
@@ -45,12 +43,11 @@ const FRAME_HITBOXES = {
 	10: Vector4(24, 29, 1.5, 1.0),
 }
 
-const ANIM_TO_SPRITE_FRAME = {
-	&"idle": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-	&"walk": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-	&"crouch": [0],
-	&"jump": [-1],
-	&"die": [8, 9, 10],
+const ANIM_TO_HITBOX = {
+	&"idle": 0,
+	&"walk": 0,
+	&"crouch": 0,
+	&"die": 8,
 }
 
 const JUMP_HITBOX = Vector4(24, 32, 1.5, -0.5)
@@ -58,15 +55,10 @@ const JUMP_HITBOX = Vector4(24, 32, 1.5, -0.5)
 signal died(player_id: int)
 
 func _ready() -> void:
-	# Set up player visual
-	var player_color = _get_player_color()
-	body_sprite.modulate = player_color
-	# Set face placeholder (same color, lighter)
-	face_sprite.modulate = player_color.lightened(0.3)
-	face_sprite.visible = true
-	# Connect hitbox update
-	body_sprite.frame_changed.connect(_on_frame_changed)
-	_apply_hitbox_for_frame(&"idle", 0)
+	# Tintura del rig (color de jugador) y hitbox inicial
+	body_node.set_tint(_get_player_color())
+	body_node.anim_started.connect(_on_rig_anim_started)
+	_apply_hitbox_for_anim(&"idle")
 	# Spawn protection
 	start_invulnerability(SPAWN_INVULN_TIME)
 
@@ -92,24 +84,15 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	move_and_slide()
 
-func _on_frame_changed() -> void:
-	_apply_hitbox_for_frame(body_sprite.animation, body_sprite.frame)
+func _on_rig_anim_started(anim: StringName) -> void:
+	_apply_hitbox_for_anim(anim)
 
-func _apply_hitbox_for_frame(anim_name: StringName, local_frame: int) -> void:
-	if anim_name == &"jump":
+func _apply_hitbox_for_anim(anim: StringName) -> void:
+	if anim == &"jump" or anim == &"fall":
 		_set_hitbox(JUMP_HITBOX)
 		return
-	if not ANIM_TO_SPRITE_FRAME.has(anim_name):
-		return
-	var sprite_frames = ANIM_TO_SPRITE_FRAME[anim_name]
-	if local_frame < 0 or local_frame >= sprite_frames.size():
-		return
-	var sprite_frame = sprite_frames[local_frame]
-	if sprite_frame < 0:
-		return
-	if not FRAME_HITBOXES.has(sprite_frame):
-		return
-	_set_hitbox(FRAME_HITBOXES[sprite_frame])
+	if ANIM_TO_HITBOX.has(anim):
+		_set_hitbox(FRAME_HITBOXES[ANIM_TO_HITBOX[anim]])
 
 func _set_hitbox(data: Vector4) -> void:
 	var w = data.x
@@ -164,10 +147,9 @@ func take_damage(_amount: int, attacker_id: int) -> void:
 	die()
 
 func _play_hit_flash() -> void:
-	body_sprite.modulate = Color.WHITE
+	body_node.modulate = Color(10, 10, 10)
 	var tween = create_tween()
-	tween.tween_property(body_sprite, "modulate", Color(10, 10, 10), 0.05)
-	tween.tween_property(body_sprite, "modulate", _get_player_color(), 0.1)
+	tween.tween_property(body_node, "modulate", Color.WHITE, 0.15)
 
 func _get_player_color() -> Color:
 	return GlobalPlayerInfo.jugadores[player_id - 1].get_color()

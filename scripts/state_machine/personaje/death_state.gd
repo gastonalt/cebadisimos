@@ -2,10 +2,10 @@ extends BaseState
 
 ## Death state — character is dead.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("die")
+	body_rig.play("die")
 	var ch = _get_character()
 	ch.velocity = Vector2.ZERO
 	ch.collision.set_deferred("disabled", true)

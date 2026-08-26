@@ -2,10 +2,10 @@ extends BaseState
 
 ## Walk state — character moving horizontally.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("walk")
+	body_rig.play("walk")
 
 func physics_update(delta: float) -> StringName:
 	var p = _get_prefix()
@@ -36,11 +36,11 @@ func physics_update(delta: float) -> StringName:
 	var speed = ch.CROUCH_SPEED if ch.is_crouching else ch.SPEED
 	ch.velocity.x = move_toward(ch.velocity.x, dir * speed, ch.ACCELERATION * delta)
 	# Animación adaptativa: camina más rápido -> anima más rápido
-	body_sprite.speed_scale = clampf(abs(ch.velocity.x) / float(speed), 0.6, 1.6)
+	body_rig.speed_scale = clampf(abs(ch.velocity.x) / float(speed), 0.6, 1.6)
 	return &""
 
 func exit() -> void:
-	body_sprite.speed_scale = 1.0
+	body_rig.speed_scale = 1.0
 
 func _get_prefix() -> String:
 	return "p%d_" % _get_character().player_id

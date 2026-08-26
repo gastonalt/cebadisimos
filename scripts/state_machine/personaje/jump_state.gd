@@ -2,10 +2,10 @@ extends BaseState
 
 ## Jump state — character ascending.
 
-@onready var body_sprite: AnimatedSprite2D = $"../../Body/BodySprite"
+@onready var body_rig: Node2D = $"../../Body"
 
 func enter(_data: Dictionary = {}) -> void:
-	body_sprite.play("jump")
+	body_rig.play("jump")
 
 func physics_update(delta: float) -> StringName:
 	var p = _get_prefix()
