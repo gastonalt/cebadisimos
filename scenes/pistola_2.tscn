@@ -1,16 +1,16 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://krkpxgc5glie"]
 
-[ext_resource type="Script" path="res://scripts/pistola_2.gd" id="1_p2script"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_00.png" id="t0"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_01.png" id="t1"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_02.png" id="t2"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_03.png" id="t3"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_04.png" id="t4"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_05.png" id="t5"]
-[ext_resource type="Texture2D" path="res://sprites/armas/pistola_2/game/frame_06.png" id="t6"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
+[ext_resource type="Script" uid="uid://c1k65e3ndkpi" path="res://scripts/pistola_2.gd" id="1_p2script"]
+[ext_resource type="Script" uid="uid://c2l4ikkvhoy32" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
+[ext_resource type="Script" uid="uid://umby3m482kcr" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
+[ext_resource type="Script" uid="uid://c4bk6egkkhrbl" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
+[ext_resource type="Texture2D" uid="uid://m12rjv7nh7g3" path="res://sprites/armas/pistola_2/game/frame_00.png" id="t0"]
+[ext_resource type="Texture2D" uid="uid://by4cqo67far5s" path="res://sprites/armas/pistola_2/game/frame_01.png" id="t1"]
+[ext_resource type="Texture2D" uid="uid://dexmnk37m5g32" path="res://sprites/armas/pistola_2/game/frame_02.png" id="t2"]
+[ext_resource type="Texture2D" uid="uid://skbt1jbia7r7" path="res://sprites/armas/pistola_2/game/frame_03.png" id="t3"]
+[ext_resource type="Texture2D" uid="uid://b7aqbaq3tuimo" path="res://sprites/armas/pistola_2/game/frame_04.png" id="t4"]
+[ext_resource type="Texture2D" uid="uid://bv4ql3sxnil56" path="res://sprites/armas/pistola_2/game/frame_05.png" id="t5"]
+[ext_resource type="Texture2D" uid="uid://c4b1pmyoulk6g" path="res://sprites/armas/pistola_2/game/frame_06.png" id="t6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p2fire"]
 animations = [{
@@ -46,15 +46,15 @@ script = ExtResource("1_p2script")
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-flip_h = true
 texture = ExtResource("t0")
+flip_h = true
 
 [node name="FireEffect" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-flip_h = true
 sprite_frames = SubResource("SpriteFrames_p2fire")
 animation = &"fire"
+flip_h = true
 
 [node name="MuzzlePoint" type="Marker2D" parent="."]
 position = Vector2(2.5, 2.2)

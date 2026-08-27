@@ -28,13 +28,13 @@ const SQUASH_ON_LAND = Vector2(1.25, 0.75)
 const SQUASH_ON_JUMP = Vector2(0.8, 1.2)
 const SPAWN_INVULN_TIME = 1.5
 
-# Hitboxes basadas en el modelo del cuerpo (36px de alto: y -19..+16, pies en +16)
+# Hitboxes — el fondo de la colisión queda en y=0 (nivel del piso)
 # Vector4 = (ancho, alto, offset_x_centro, offset_y_centro)
-const STAND_HITBOX = Vector4(16, 34, 0, -1)
-const CROUCH_HITBOX = Vector4(20, 26, 0, 3)
-const JUMP_HITBOX = Vector4(14, 28, 0, 0)
-const FALL_HITBOX = Vector4(16, 32, 0, 0)
-const DIE_HITBOX = Vector4(22, 18, 0, 7)
+const STAND_HITBOX = Vector4(16, 34, 0, -17)
+const CROUCH_HITBOX = Vector4(20, 26, 0, -13)
+const JUMP_HITBOX = Vector4(14, 28, 0, -14)
+const FALL_HITBOX = Vector4(16, 32, 0, -16)
+const DIE_HITBOX = Vector4(22, 18, 0, -9)
 
 signal died(player_id: int)
 

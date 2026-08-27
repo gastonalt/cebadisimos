@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c2sl3flbcl1lc" path="res://sprites/escopeta byCalasonic.png" id="1_shot_tex"]
 [ext_resource type="Script" uid="uid://c7m3knyafvu0q" path="res://scripts/escopeta.gd" id="2_shot_script"]
 [ext_resource type="Texture2D" uid="uid://djnxmxeosmhqw" path="res://sprites/All_Fire_Bullet_Pixel_16x16.png" id="3_fire_tex"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
-[ext_resource type="Script" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
+[ext_resource type="Script" uid="uid://c2l4ikkvhoy32" path="res://scripts/state_machine/weapons/weapon_idle_state.gd" id="4_widle"]
+[ext_resource type="Script" uid="uid://umby3m482kcr" path="res://scripts/state_machine/weapons/weapon_fire_state.gd" id="5_wfire"]
+[ext_resource type="Script" uid="uid://c4bk6egkkhrbl" path="res://scripts/state_machine/state_machine.gd" id="6_sm"]
 
 [sub_resource type="AtlasTexture" id="Atlas_fire0"]
 atlas = ExtResource("3_fire_tex")
